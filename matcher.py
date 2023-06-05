@@ -13,9 +13,16 @@ excel_files = [f for f in os.listdir(folder_tables_to_compare) if f.endswith('.x
 # Asegurarse de que hay exactamente dos archivos de Excel en la carpeta
 assert len(excel_files) == 2, f"Debe haber exactamente dos archivos de Excel en la carpeta {folder_tables_to_compare}"
 
+# Verificar que los nombres de los archivos comiencen con 'A_' y 'B_' respectivamente
+assert excel_files[0].startswith('A_') and excel_files[1].startswith('B_'), "Los nombres de los archivos deben comenzar con 'A_' y 'B_' respectivamente"
+
 # Crear las rutas completas a los archivos de Excel
 excel_file_1 = os.path.join(folder_tables_to_compare, excel_files[0])
 excel_file_2 = os.path.join(folder_tables_to_compare, excel_files[1])
+
+# Obtener nombres de archivos sin extensión y sin A_ o B_ para nombrar las columnas de los documentos resultantes
+excel_file_1_name = excel_files[0].replace('.xlsx', '').replace('A_', '')
+excel_file_2_name = excel_files[1].replace('.xlsx', '').replace('B_', '')
 
 # Leer las tablas en DataFrames de pandas
 df_a = pd.read_excel(excel_file_1)
@@ -58,7 +65,7 @@ for col_b in df_b.columns:
         uncertain_columns.append([col_b, ', '.join(matching_a_columns)])
 
 # Crear un DataFrame a partir del diccionario de coincidencias
-matches_df = pd.DataFrame(list(column_matches.items()), columns=['B', 'A'])
+matches_df = pd.DataFrame(list(column_matches.items()), columns=[excel_file_2_name, excel_file_1_name])
 
 # Crear la carpeta folder_comparison_results si no existe
 if not os.path.exists(folder_comparison_results):
@@ -68,7 +75,7 @@ if not os.path.exists(folder_comparison_results):
 matches_df.to_excel(os.path.join(folder_comparison_results, 'column_matches.xlsx'), index=False)
 
 # Crear un DataFrame a partir de la lista de columnas inciertas
-uncertain_df = pd.DataFrame(uncertain_columns, columns=['B', 'Matching A columns'])
+uncertain_df = pd.DataFrame(uncertain_columns, columns=[excel_file_2_name, f'Matching "{excel_file_1_name}" columns'])
 
 # Guardar el DataFrame en un archivo de Excel en la carpeta folder_comparison_results
 uncertain_df.to_excel(os.path.join(folder_comparison_results, 'columns_uncertain.xlsx'), index=False)
