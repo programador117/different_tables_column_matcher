@@ -1,5 +1,8 @@
+import os
 import pandas as pd
 
+folder_tables_to_compare = 'compared_tables'
+folder_comparison_results = 'comparison_results'
 # Leer las tablas en DataFrames de pandas
 df_a = pd.read_excel('tabla_a.xlsx')
 df_b = pd.read_excel('tabla_b.xlsx')
