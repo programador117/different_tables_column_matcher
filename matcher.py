@@ -33,12 +33,10 @@ for col_b in df_b.columns:
     
     # Iterar sobre las columnas de la tabla A
     for col_a in df_a.columns:
-        # Obtener los valores de la columna actual en la tabla A (excluyendo los valores vacíos)
-        a_values = set(df_a[col_a].dropna().values)
-        
-        # Si todos los valores de la columna B están contenidos en la columna A, agregar el nombre de la columna A a la lista de columnas coincidentes
-        if b_values.issubset(a_values):
-            matching_a_columns.append(col_a)
+        # Verificar si la columna A ya ha sido asociada con una columna B
+        if col_a not in column_matches.values():
+            # Obtener los valores de la columna actual en la tabla A (excluyendo los valores vacíos)
+            a_values = set(df_a[col_a].dropna().values)
     
     # Si solo hay una columna coincidente en la tabla A, agregar el par de nombres de columnas al diccionario
     if len(matching_a_columns) == 1:
