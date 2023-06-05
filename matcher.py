@@ -48,11 +48,15 @@ for col_b in df_b.columns:
 # Crear un DataFrame a partir del diccionario de coincidencias
 matches_df = pd.DataFrame(list(column_matches.items()), columns=['B', 'A'])
 
-# Guardar el DataFrame en un archivo de Excel
-matches_df.to_excel('column_matches.xlsx', index=False)
+# Crear la carpeta folder_comparison_results si no existe
+if not os.path.exists(folder_comparison_results):
+    os.makedirs(folder_comparison_results)
+
+# Guardar el DataFrame en un archivo de Excel en la carpeta folder_comparison_results
+matches_df.to_excel(os.path.join(folder_comparison_results, 'column_matches.xlsx'), index=False)
 
 # Crear un DataFrame a partir de la lista de columnas inciertas
 uncertain_df = pd.DataFrame(uncertain_columns, columns=['B', 'Matching A columns'])
 
-# Guardar el DataFrame en un archivo de Excel
-uncertain_df.to_excel('columns_uncertain.xlsx', index=False)
+# Guardar el DataFrame en un archivo de Excel en la carpeta folder_comparison_results
+uncertain_df.to_excel(os.path.join(folder_comparison_results, 'columns_uncertain.xlsx'), index=False)
