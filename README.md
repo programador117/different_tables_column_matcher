@@ -1,20 +1,18 @@
-
 # Asociación de Columnas en Tablas de Excel
 
 Este repositorio contiene un script de Python que te permite asociar automáticamente las columnas de dos tablas de Excel con nombres de columnas diferentes.
 
 ## ¿Cómo funciona?
 
-El script lee ambas tablas en `DataFrames` de `pandas` y luego itera sobre las columnas de ambas tablas para encontrar coincidencias en los valores. Si una columna en la tabla B tiene valores que son un subconjunto de los valores en una columna de la tabla A, el script agrega el par de nombres de columnas a un diccionario. Luego, el script guarda el diccionario en un archivo de Excel con dos columnas llamadas A y B.
-
-Si hay varias columnas en la tabla B que coinciden con la misma columna en la tabla A, el script guarda esas columnas en un archivo de Excel separado llamado `columns_uncertain.xlsx`.
+El script lee automáticamente dos archivos de Excel en una carpeta llamada `compared_tables`, encuentra las coincidencias entre las columnas de ambas tablas y guarda los resultados en una carpeta llamada `comparison_results`. El script permite un cierto número de valores adicionales en las columnas de la tabla B (por si tiene alguno extra que no está en la
+tabla A) y utiliza los nombres de los archivos (sin la extensión `.xlsx` y sin el prefijo `A_` o `B_`) para nombrar las columnas en los archivos de resultados.
 
 ## ¿Cómo usarlo?
 
 1. Asegúrate de tener instaladas las librerías `pandas` y `openpyxl`.
-2. Coloca tus archivos de Excel en el mismo directorio que el script y asegúrate de que los nombres de los archivos sean `tabla_a.xlsx` y `tabla_b.xlsx`.
+2. Coloca tus archivos de Excel en una carpeta llamada `compared_tables`. Los nombres de los archivos deben comenzar con `A_` y `B_` respectivamente.
 3. Ejecuta el script con el comando `python script.py`.
-4. Revisa los archivos `column_matches.xlsx` y `columns_uncertain.xlsx` para ver los resultados.
+4. Revisa los archivos en la carpeta `comparison_results` para ver los resultados.
 
 ## Contribuciones
 
