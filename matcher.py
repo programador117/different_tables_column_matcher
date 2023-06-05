@@ -3,6 +3,10 @@ import pandas as pd
 
 folder_tables_to_compare = 'compared_tables'
 folder_comparison_results = 'comparison_results'
+
+# Establecer el número máximo de valores adicionales permitidos
+max_additional_values = 2
+
 # Obtener la lista de archivos en la carpeta folder_tables_to_compare
 excel_files = [f for f in os.listdir(folder_tables_to_compare) if f.endswith('.xlsx')]
 
@@ -37,6 +41,14 @@ for col_b in df_b.columns:
         if col_a not in column_matches.values():
             # Obtener los valores de la columna actual en la tabla A (excluyendo los valores vacíos)
             a_values = set(df_a[col_a].dropna().values)
+            
+            # Calcular el número de valores adicionales en la columna B
+            additional_values = len(b_values.difference(a_values))
+            
+            # Si todos los valores de la columna B están contenidos en la columna A, agregar el nombre de la columna A a la lista de columnas coincidentes
+            if len(b_values) > 0 and len(a_values.intersection(b_values)) > 0: 
+                if (b_values.issubset(a_values)) or (additional_values <= max_additional_values and abs(len(a_values) - len(b_values)) == additional_values):
+                    matching_a_columns.append(col_a)
     
     # Si solo hay una columna coincidente en la tabla A, agregar el par de nombres de columnas al diccionario
     if len(matching_a_columns) == 1:
