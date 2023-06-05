@@ -1,6 +1,4 @@
-Claro, aquí tienes un ejemplo de contenido para el archivo `README.md` de tu repositorio en GitHub:
 
-```
 # Asociación de Columnas en Tablas de Excel
 
 Este repositorio contiene un script de Python que te permite asociar automáticamente las columnas de dos tablas de Excel con nombres de columnas diferentes.
@@ -21,6 +19,3 @@ Si hay varias columnas en la tabla B que coinciden con la misma columna en la ta
 ## Contribuciones
 
 Si tienes alguna sugerencia o mejora para el código, no dudes en hacer un pull request o abrir un issue. ¡Toda contribución es bienvenida!
-```
-
-Este contenido proporciona una descripción general del propósito y funcionamiento del script, así como instrucciones sobre cómo usarlo. También incluye una sección sobre cómo contribuir al repositorio. ¿Te parece bien este contenido para el archivo `README.md`?
