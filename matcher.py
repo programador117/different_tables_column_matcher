@@ -3,9 +3,19 @@ import pandas as pd
 
 folder_tables_to_compare = 'compared_tables'
 folder_comparison_results = 'comparison_results'
+# Obtener la lista de archivos en la carpeta folder_tables_to_compare
+excel_files = [f for f in os.listdir(folder_tables_to_compare) if f.endswith('.xlsx')]
+
+# Asegurarse de que hay exactamente dos archivos de Excel en la carpeta
+assert len(excel_files) == 2, f"Debe haber exactamente dos archivos de Excel en la carpeta {folder_tables_to_compare}"
+
+# Crear las rutas completas a los archivos de Excel
+excel_file_1 = os.path.join(folder_tables_to_compare, excel_files[0])
+excel_file_2 = os.path.join(folder_tables_to_compare, excel_files[1])
+
 # Leer las tablas en DataFrames de pandas
-df_a = pd.read_excel('tabla_a.xlsx')
-df_b = pd.read_excel('tabla_b.xlsx')
+df_a = pd.read_excel(excel_file_1)
+df_b = pd.read_excel(excel_file_2)
 
 # Crear un diccionario vacío para almacenar las coincidencias
 column_matches = {}
